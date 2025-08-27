@@ -6,8 +6,13 @@ const API = axios.create({
 
 export default API;
 
-export const getCars = async () => {
-  return API.get('/cars');
+export const getCars = async (sortBy?: string, sortOrder?: string) => {
+  let url = '/cars';
+  if (sortBy && sortOrder) {
+    url = `/cars?sortBy=${sortBy}&sortOrder=${sortOrder}`;
+  }
+  console.log("Fetching cars from:", url); // Added for debugging
+  return API.get(url);
 };
 
 export const getCarById = async (id: string) => {
